@@ -5,11 +5,20 @@ class DateInput(forms.DateInput):
     input_type = 'date'
 
 class BookingForm(forms.ModelForm):
+    DOCTOR_CHOICES = [
+        ("Dr. Arun", "Dr. Arun - General Medicine"),
+        ("Dr. Thomas", "Dr. Thomas - General Surgery"),
+        ("Dr. Anjali", "Dr. Anjali - Neurology"),
+        ("Dr. Sreelakshmi", "Dr. Sreelakshmi - Pediatrics"),
+    ]
+
+    doc_name = forms.ChoiceField(choices=DOCTOR_CHOICES, label="Doctor")
+
     class Meta:
         model = Booking
         fields = '__all__'
 
-        widgets =  {
+        widgets = {
             'booking_date': DateInput(),
         }
 
@@ -17,6 +26,6 @@ class BookingForm(forms.ModelForm):
             'p_name': 'Patient Name',
             'p_phone': 'Patient Phone',
             'p_email': 'Patient Email',
-            'doc_name': 'Doctor Name',
             'booking_date': 'Booking Date',
+            'doc_name': 'Doctor Name',
         }
